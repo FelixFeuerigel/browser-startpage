@@ -1,6 +1,6 @@
 body{
     background-color: #191c1f;
-    background-image: url(http://127.0.0.1:5500/images/Galaxy_Abstract.jpg);
+    background-image: url(../images/galaxy_abstract.jpg);
     background-size: cover;
     background-attachment: fixed;
     font-family: Arial, Helvetica, sans-serif;
