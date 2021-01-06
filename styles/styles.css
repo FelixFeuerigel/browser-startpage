@@ -4,7 +4,18 @@ body{
     background-size: cover;
     background-attachment: fixed;
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
+    color: var(--text-color);
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --border-radius: 5px;
+    --item-color: rgba(90, 90, 90, 0.274);
+    --text-color: white;
+    --highlight-color: rgb(90, 90, 90);
+    --background-color: rgba(51, 51, 51, 0.801);
 }
 
 .clock{
@@ -16,22 +27,19 @@ body{
 }
 
 section{
-    background-color: rgba(51, 51, 51, 0.801);
-    border-radius: 5px;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
 }
 
 /*main flex*/
 .flex-container{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .flex-item{
-    flex: 50%;
     margin: 20px;
-
-    /* debug */
-    /* background-color:rgba(172, 255, 47, 0.705) */
 }
 
 /*link flex*/
@@ -40,38 +48,65 @@ section{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content:left;
-}
-
-/* link section */
-.link-container{
-
+    padding-right: 10px;
 }
 
 .link-tile{
     margin: 10px;
     margin-right: 0px;
     padding: 7px;
-    background-color: rgba(90, 90, 90, 0.274);
-    border-radius: 5px;
-
-    /* debug */
-    /* background-color:rgba(255, 123, 47, 0.705) */
+    background-color: var(--item-color);
+    border-radius: var(--border-radius);
 }
 
 .link-tile a:link, .link-tile a:visited{
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     font-family: 'Lato', sans-serif;
     font-size: 1.25em;
 }
 
 .link-tile:hover{
-    background-color: rgb(90, 90, 90);
+    background-color: var(--highlight-color);
 }
 
-/**/
+html, body, .flex-container{
+    height: 100%;    /*expanding the flex-containers to 100% height*/
+}
+
+/*feed*/
 .feed{
     overflow: auto;
+    margin: 20px;
+    -ms-overflow-style: none;  /* hide scrollbar for IE and Edge */
+    scrollbar-width: none;  /* hide scrollbar for  Firefox */
+}
+
+.feed::-webkit-scrollbar{ /* custom scrollbar for Chrome*/
+    width: 10px;    /* should be 2 * --border-radius */
+}
+.feed::-webkit-scrollbar-thumb{
+    background: var(--item-color);
+    border-radius: var(--border-radius);
+}
+.feed::-webkit-scrollbar-thumb:hover{
+    background: var(--highlight-color);
+}
+
+.feed a{
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.feed ul{
+    padding: 0px;
+}
+
+.feed li{
+    display: block;
+    background-color: var(--item-color);
+    border-radius: var(--border-radius);
+    margin: 7px;
 }
 
 @media (max-width: 800px) {

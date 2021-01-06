@@ -1,4 +1,4 @@
-function GetClock(){
+function UpdateClock(){
     var d = new Date();
     var nhour = d.getHours()
     var nmin = d.getMinutes();
@@ -13,6 +13,5 @@ function GetClock(){
     var clocktext="" + nhour + ":" + nmin + "";
     document.getElementById('clock').innerHTML = clocktext;
 }
- 
-GetClock();
-setInterval(GetClock,1000);
+UpdateClock();
+setInterval(UpdateClock,1000);
