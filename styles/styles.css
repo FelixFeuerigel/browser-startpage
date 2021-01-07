@@ -31,34 +31,55 @@ section{
     border-radius: var(--border-radius);
 }
 
-/*main flex*/
+/* main flex */
 .flex-container{
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
 }
 
 .flex-item{
-    margin: 20px;
+    margin: 10px;
 }
 
-/*link flex*/
-.link-container{
+html, body, .flex-container{
+    height: 100%;    /* expanding the flex-containers to 100% height */
+}
+
+/* link group flex */
+.link-group{
     display: flex;
     flex-direction: row;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+/* link flex */
+.link-container{
+    display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content:left;
+    width: 200px;
     padding-right: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .link-tile{
     margin: 10px;
     margin-right: 0px;
+    margin-bottom: 0px;
     padding: 7px;
     background-color: var(--item-color);
     border-radius: var(--border-radius);
 }
 
+.link-tile{
+    text-align: center;
+}
 .link-tile a:link, .link-tile a:visited{
     color: var(--text-color);
     text-decoration: none;
@@ -70,14 +91,9 @@ section{
     background-color: var(--highlight-color);
 }
 
-html, body, .flex-container{
-    height: 100%;    /*expanding the flex-containers to 100% height*/
-}
-
-/*feed*/
+/* feed */
 .feed{
     overflow: auto;
-    margin: 20px;
     -ms-overflow-style: none;  /* hide scrollbar for IE and Edge */
     scrollbar-width: none;  /* hide scrollbar for  Firefox */
 }
@@ -111,7 +127,7 @@ html, body, .flex-container{
 
 @media (max-width: 800px) {
     .flex-container {
-      flex-direction: column;
+        flex-direction: column;
     }
 
     .clock{
