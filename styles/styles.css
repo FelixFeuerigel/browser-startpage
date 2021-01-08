@@ -5,9 +5,13 @@ body{
     background-attachment: fixed;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--text-color);
-    overflow: hidden;
+    -ms-overflow-style: none;  /* hide scrollbar for IE and Edge */
+    scrollbar-width: none;  /* hide scrollbar for Firefox */
     margin: 0;
     padding: 0;
+}
+body::-webkit-scrollbar{    /* hide scrollbar for Chrome browsers */
+    display: none;
 }
 
 :root{
@@ -41,6 +45,7 @@ section{
 
 .flex-item{
     margin: 10px;
+    width: 50%;
 }
 
 html, body, .flex-container{
@@ -50,17 +55,17 @@ html, body, .flex-container{
 /* link group flex */
 .link-group{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: left;
-    flex-wrap: wrap;
 }
 
 /* link flex */
 .link-container{
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    justify-content:left;
+    flex-direction: column;
+    justify-content: space-around;
     width: 200px;
     padding-right: 10px;
     padding-bottom: 10px;
@@ -73,13 +78,11 @@ html, body, .flex-container{
     margin-right: 0px;
     margin-bottom: 0px;
     padding: 7px;
+    text-align: center;
     background-color: var(--item-color);
     border-radius: var(--border-radius);
 }
 
-.link-tile{
-    text-align: center;
-}
 .link-tile a:link, .link-tile a:visited{
     color: var(--text-color);
     text-decoration: none;
@@ -93,6 +96,8 @@ html, body, .flex-container{
 
 /* feed */
 .feed{
+    min-height: 75vh;
+    width: fit-content;
     overflow: auto;
     -ms-overflow-style: none;  /* hide scrollbar for IE and Edge */
     scrollbar-width: none;  /* hide scrollbar for  Firefox */
@@ -129,9 +134,16 @@ html, body, .flex-container{
     .flex-container {
         flex-direction: column;
     }
+    .flex-item{
+        width:unset;
+    }
 
     .clock{
         text-align: center;
         font-size:20vw;
+    }
+
+    .link-group{
+        justify-content:space-around;
     }
 }
