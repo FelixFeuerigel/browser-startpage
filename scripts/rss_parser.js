@@ -1,7 +1,7 @@
 const textarea = document.querySelector('#feed-textarea > ul');
 const adresses = [
     "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", //ThrillSeeker
-    "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", //TechLinked
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCeeFfhMcJa1kjtfZAGskOCA", //TechLinked
 ];
 
 async function getFeed(url = ""){
