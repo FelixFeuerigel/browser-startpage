@@ -83,7 +83,7 @@ html, body, .flex-container{
     border-radius: var(--border-radius);
 }
 
-.link-tile a:link, .link-tile a:visited{
+ .link-tile:link, .link-tile:visited{
     color: var(--text-color);
     text-decoration: none;
     font-family: 'Lato', sans-serif;
