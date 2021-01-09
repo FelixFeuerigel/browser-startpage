@@ -13,5 +13,6 @@ function UpdateClock(){
     var clocktext="" + nhour + ":" + nmin + "";
     document.getElementById('clock').innerHTML = clocktext;
 }
+
 UpdateClock();
 setInterval(UpdateClock,1000);
