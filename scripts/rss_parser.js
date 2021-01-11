@@ -1,6 +1,6 @@
 const adresses = [
-    "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", //ThrillSeeker
-    "https://www.youtube.com/feeds/videos.xml?channel_id=UCeeFfhMcJa1kjtfZAGskOCA", //TechLinked
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", // ThrillSeeker
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCeeFfhMcJa1kjtfZAGskOCA", // TechLinked
 ];
 const monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 
@@ -20,11 +20,10 @@ async function loadFeed(urlList = [], i = 0){
         urlRemain = await loadFeed(urlList, i+1);
     }
 
-    console.log(`Loading feed from: ${urlList[i]}`);
     return feednami.load(urlList[i]).then(feed => {
         let orderedFeed = [];
-        console.log(feed);
         console.log(`Success getting feed from: ${urlList[i]}`);
+        console.log(feed);
         for(let entry of feed.entries){
 
             orderedFeed.push({
@@ -40,6 +39,17 @@ async function loadFeed(urlList = [], i = 0){
         }
         else{
             return orderedFeed;
+        }
+    }, error => {
+        let orderedFeed = [];
+        console.log(`Failed to get feed from: ${urlList[i]}`);
+        console.log(error);
+
+        if(urlRemain){
+            return urlRemain;
+        }
+        else{
+            return [];
         }
     });
 }
