@@ -46,6 +46,7 @@ section{
 .flex-item{
     margin: 10px;
     width: 50%;
+    max-width: 900px;
 }
 
 html, body, .flex-container{
@@ -96,8 +97,9 @@ html, body, .flex-container{
 
 /* feed container */
 .feed{
-    min-height: 75vh;
+    min-height: 80vh;
     width: fit-content;
+    max-width: 750px;
     overflow: auto;
     -ms-overflow-style: none;  /* hide scrollbar for IE and Edge */
     scrollbar-width: none;  /* hide scrollbar for  Firefox */
