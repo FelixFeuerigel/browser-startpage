@@ -1,18 +1,12 @@
 const adresses = [
+    "https://twitchrss.appspot.com/vod/twitch",
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCo-vOxYorF0gguSt8qYWxaQ", // VRFunny
     "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", // ThrillSeeker
     "https://www.youtube.com/feeds/videos.xml?channel_id=UCeeFfhMcJa1kjtfZAGskOCA", // TechLinked
 ];
 const monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+const daynames = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
-
-function setMidnight(time){
-    time = new Date(time);
-    time.setHours(0);
-    time.setMinutes(0);
-    time.setSeconds(0);
-    time.setMilliseconds(0);
-    return time;
-}
 
 async function loadFeed(urlList = [], i = 0){
     let urlRemain;
@@ -55,23 +49,35 @@ async function loadFeed(urlList = [], i = 0){
 }
 
 async function printFeed(adresses = []){
-    let combinedFeed = await loadFeed(adresses);
-    combinedFeed.sort( (a, b) => b.date - a.date );
+
+    function timeBackToMidnight(time){
+        time = new Date(time);
+        time.setHours(0);
+        time.setMinutes(0);
+        time.setSeconds(0);
+        time.setMilliseconds(0);
+        return time;
+    }
+    
+    let combinedFeed = await loadFeed(adresses); // get feed elements
+    combinedFeed.sort( (a, b) => b.date - a.date ); // sort feed by date
 
     const t_now = new Date();
-    let t_0d = setMidnight(t_now);
-    let t_1d = setMidnight(t_now - 1 * 24 * 60 * 60 * 1000);
-    let t_7d = setMidnight(t_now - 7 * 24 * 60 * 60 * 1000);
-    let t_14d = setMidnight(t_now - 14 * 24 * 60 * 60 * 1000);
+    let t_0d = timeBackToMidnight(t_now);
+    let t_1d = timeBackToMidnight(t_now - 1 * 24 * 60 * 60 * 1000);
+    let t_7d = timeBackToMidnight(t_now - 7 * 24 * 60 * 60 * 1000);
+    let t_14d = timeBackToMidnight(t_now - 14 * 24 * 60 * 60 * 1000);
     let step = 0;
     let month = t_now.getMonth();
     let year = t_now.getFullYear();
 
-    const textContainer = document.querySelector('#feed-textarea');
+    const textContainer = document.querySelector('#feed-textarea'); // clear feed
     textContainer.innerHTML = "";
-    let h3Title = document.createElement(`h3`);
+
+    let h3Title = document.createElement(`h3`); // create RSS title
     h3Title.innerHTML = `RSS-Feed`;
     textContainer.appendChild(h3Title);
+
     textContainer.appendChild(document.createElement(`ul`));
     const textarea = document.querySelector('#feed-textarea > ul');
 
@@ -136,9 +142,7 @@ async function printFeed(adresses = []){
             h3.innerHTML = `${monthNames[month]}`;
             textarea.appendChild(h3);
         }
-        // create icon url
-
-
+        
         // create a list element
         let li = document.createElement('li');
         li.classList.add(`feed-news-entry`)
@@ -160,7 +164,7 @@ async function printFeed(adresses = []){
         }
         else{
             li.innerHTML += `
-            <div class="feed-time">${feedEntry.date.getDate()>9?feedEntry.date.getDate():"0"+feedEntry.date.getDate()}.${feedEntry.date.getMonth()>8?feedEntry.date.getMonth()+1:"0"+(feedEntry.date.getMonth()+1)}.${feedEntry.date.getFullYear()}, ${feedEntry.date.getHours()>9?feedEntry.date.getHours():"0"+feedEntry.date.getHours()}:${feedEntry.date.getMinutes()>9?feedEntry.date.getMinutes():"0"+feedEntry.date.getMinutes()} Uhr</div>
+            <div class="feed-time">${feedEntry.date.getDate()>9?feedEntry.date.getDate():"0"+feedEntry.date.getDate()}.${feedEntry.date.getMonth()>8?feedEntry.date.getMonth()+1:"0"+(feedEntry.date.getMonth()+1)}, ${feedEntry.date.getHours()>9?feedEntry.date.getHours():"0"+feedEntry.date.getHours()}:${feedEntry.date.getMinutes()>9?feedEntry.date.getMinutes():"0"+feedEntry.date.getMinutes()} Uhr</div>
             `;
         }
         // append HTML content to list 

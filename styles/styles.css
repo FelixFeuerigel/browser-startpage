@@ -1,3 +1,11 @@
+:root{
+    --border-radius: 5px;
+    --item-color: rgba(152, 94, 214, 0.8);
+    --text-color: white;
+    --highlight-color: rgba(219, 50, 134, 0.9);
+    --background-color: rgba(101, 64, 157, 0.8);
+}
+
 body{
     background-color: #191c1f;
     background-image: url(../images/background.jpg);
@@ -12,14 +20,6 @@ body{
 }
 body::-webkit-scrollbar{    /* hide scrollbar for Chrome browsers */
     display: none;
-}
-
-:root{
-    --border-radius: 5px;
-    --item-color: rgba(90, 90, 90, 0.404);
-    --text-color: white;
-    --highlight-color: rgb(90, 90, 90);
-    --background-color: rgba(51, 51, 51, 0.801);
 }
 
 .clock{
@@ -45,7 +45,7 @@ section{
 
 .flex-item{
     margin: 10px;
-    width: 50%;
+    width: 60%;
     max-width: 900px;
 }
 
@@ -67,7 +67,7 @@ html, body, .flex-container{
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-around;
-    width: 200px;
+    width: 180px;
     padding-right: 10px;
     padding-bottom: 10px;
     margin-top: 10px;
@@ -83,12 +83,13 @@ html, body, .flex-container{
     background-color: var(--item-color);
     border-radius: var(--border-radius);
     transition: background-color 0.2s ease-out;
+    font-size: 1.25em;
+    cursor: pointer;
 }
 
  .link-tile:link, .link-tile:visited{
     color: var(--text-color);
     text-decoration: none;
-    font-size: 1.25em;
 }
 
 .link-tile:hover{
@@ -118,7 +119,7 @@ html, body, .flex-container{
 
 /* feed entrys */
 .feed a{
-  text-decoration: none;
+  text-decoration: none; /* removing link decoration */
   color: var(--text-color);
 }
 
@@ -127,24 +128,25 @@ html, body, .flex-container{
     margin: 0px;
 }
 
-.feed li{
+.feed li, .feed h3{ /* all list items */
     display: block;
     border-radius: var(--border-radius);
-    margin: 5px;
+    margin: 10px;
+    margin-left: 10px;
 }
 
 .feed-news-entry{
     background-color: var(--item-color);
 }
 
-.feed h3, .feed-time-entry{
+.feed h3, .feed-time-entry{ /* informarion items */
     font-size: 19px;
     font-weight: bold;
     background-color: var(--highlight-color);
     border-radius: var(--border-radius);
-    margin: 5px;
     padding: 7px;
 }
+
 .feed h3{
     margin-top: 10px;
 }
@@ -162,6 +164,11 @@ html, body, .flex-container{
     text-align: right;
 }
 
+.feed img{
+    border-radius: var(--border-radius);
+    max-width: 100%;
+}
+
 .feed-meta-title-container{
     flex-flow: column;
     flex-wrap: nowrap;
@@ -170,6 +177,12 @@ html, body, .flex-container{
 .feed-meta-title{
     font-size:larger;
     font-weight: bold;
+}
+
+.feed-meta-title-container img{
+    width: 42px;
+    height: 42px;
+    float: right;
 }
 
 .feed-entry-title{
@@ -183,18 +196,18 @@ html, body, .flex-container{
     padding-bottom: 0px;
 }
 
-.feed-meta-title-container img{
-    width: 42px;
-    height: 42px;
-    float: right;
+.feed-entry-description *{
+    margin: 0px !important;
+    padding: 0px !important;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 960px) {
     .flex-container {
         flex-direction: column;
     }
     .flex-item{
-        width:unset;
+        width: unset;
+        max-width: none;
     }
 
     .clock{

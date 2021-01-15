@@ -16,3 +16,13 @@ function UpdateClock(){
 
 UpdateClock();
 setInterval(UpdateClock,1000);
+
+function getURL(url = "", header = []){
+    let xml = new XMLHttpRequest();
+    xml.open("GET", url);
+    for(let i in header){
+        xml.setRequestHeader(header[i][0], header[i][1])
+    }
+    xml.send();
+    return xml;
+}
