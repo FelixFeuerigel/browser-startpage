@@ -19,7 +19,6 @@ async function loadFeed(urlList = [], i = 0){
         console.log(`Success getting feed from: ${urlList[i]}`);
         console.log(feed);
         for(let entry of feed.entries){
-
             orderedFeed.push({
                 meta: feed.meta,
                 date: new Date(entry.pubdate),
@@ -127,12 +126,12 @@ async function printFeed(adresses = []){
                 textarea.appendChild(h3);
             }
         }
-        else if(feedEntry.date.getFullYear() != year){
+        else if(feedEntry.date.getFullYear() != t_now.getFullYear() && feedEntry.date.getMonth() != month){
             year = feedEntry.date.getFullYear();
             month = feedEntry.date.getMonth();
             let h3 = document.createElement('li');
             h3.classList.add(`feed-time-entry`)
-            h3.innerHTML = `${monthNames[11]} ${year}`;
+            h3.innerHTML = `${monthNames[month]} ${year}`;
             textarea.appendChild(h3);
         }
         else if(feedEntry.date.getMonth() != month){
