@@ -2,7 +2,7 @@
     --border-radius: 5px;
     --item-color: rgba(152, 94, 214, 0.8);
     --text-color: white;
-    --highlight-color: rgba(219, 50, 134, 0.9);
+    --highlight-color: rgb(219, 50, 134);
     --background-color: rgba(101, 64, 157, 0.8);
 }
 
@@ -45,7 +45,7 @@ section{
 
 .flex-item{
     margin: 10px;
-    width: 60%;
+    width: 70%;
     max-width: 900px;
 }
 
@@ -121,6 +121,10 @@ html, body, .flex-container{
 .feed a{
   text-decoration: none; /* removing link decoration */
   color: var(--text-color);
+  transition: color 0.2s ease-out;
+}
+.feed a:hover{
+    color: var(--highlight-color);
 }
 
 .feed ul{
@@ -152,23 +156,6 @@ html, body, .flex-container{
 }
 
 /* inside of feed entrys */
-.feed-time, .feed-entry-description, .feed-entry-title, .feed-meta-title{
-    display: block;
-    padding: 5px;
-}
-.feed-meta-title-container img{
-    margin: 5px;
-}
-
-.feed-time{
-    text-align: right;
-}
-
-.feed img{
-    border-radius: var(--border-radius);
-    max-width: 100%;
-}
-
 .feed-meta-title-container{
     flex-flow: column;
     flex-wrap: nowrap;
@@ -180,6 +167,7 @@ html, body, .flex-container{
 }
 
 .feed-meta-title-container img{
+    margin: 5px;
     width: 42px;
     height: 42px;
     float: right;
@@ -191,6 +179,19 @@ html, body, .flex-container{
     padding-bottom: 0px;
 }
 
+.feed-time, .feed-entry-description, .feed-entry-title, .feed-meta-title{
+    display: block;
+    padding: 5px;
+}
+
+.feed-entry-description img{
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    max-width: 100%;
+    width: 100%;
+    max-height: 350px;
+}
+
 .feed-entry-description{
     padding-top: 0px;
     padding-bottom: 0px;
@@ -199,6 +200,10 @@ html, body, .flex-container{
 .feed-entry-description *{
     margin: 0px !important;
     padding: 0px !important;
+}
+
+.feed-time{
+    text-align: right;
 }
 
 @media (max-width: 960px) {

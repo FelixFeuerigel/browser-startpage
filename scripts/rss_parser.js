@@ -1,7 +1,8 @@
 const addresses = [
-    "https://twitchrss.appspot.com/vod/twitch",
     "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", // ThrillSeeker
     "https://www.youtube.com/feeds/videos.xml?channel_id=UCeeFfhMcJa1kjtfZAGskOCA", // TechLinked
+    "https://twitchrss.appspot.com/vod/thrilluwu",
+    "http://sempervideo.de/feed/",
 ];
 const monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 const daynames = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
@@ -41,7 +42,7 @@ class RssAddress{
     constructor(pAdress = new String()){
         this.address = pAdress;
         this.status = "no data";
-        this.iconURL = "https://" + new URL(this.address).host + "/favicon.ico";
+        this.iconURL = "http://" + new URL(this.address).host + "/favicon.ico";
     }
     onRssAddressLoaded(rssFeed){ // gets executed if the Address is loaded successfully
         this.rssData = rssFeed.meta;
@@ -79,12 +80,11 @@ class RssFeed {
     monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
     daynames = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
-    constructor(pTextarea = new Element(), pAddresses = new Array(), timer = 40000){
+    constructor(pTextarea = new Element(), pAddresses = new Array()){
         this.textContainer = pTextarea
         for(let address of pAddresses){
             this.rssAddresses.push(new RssAddress(address))
         }
-        setInterval(()=>{this.upgradeRecursive();}, timer);
         this.upgradeRecursive();
     }
     update(){ // updates the content of this without updating the rssAddresses
@@ -181,30 +181,28 @@ class RssFeed {
                 textarea.appendChild(h3);
             }
             
-            // create a list element
-            let li = document.createElement('li');
-            li.classList.add(`feed-news-entry`)
-            // add HTML content to list items
-            li.innerHTML = `
+            // create HTML content for list items
+            let newInnerHTML = String();
+            newInnerHTML = `
             <div class="feed-meta-title-container">
                 <img src="${rssElement.iconURL}">
                 <a class="feed-meta-title" href="${rssElement.metaLink}">${rssElement.metaTitle}</a>
             </div>
             <a class="feed-entry-title" href="${rssElement.rssLink}">${rssElement.rssTitle}</a>
             `;
-            if(rssElement.rssDescription != null){ 
-                li.innerHTML += `<div class="feed-entry-description">${rssElement.rssDescription}</div>`;
+            if(rssElement.rssDescription != null || rssElement.rssImage != null){ 
+                newInnerHTML += `<div class="feed-entry-description">`;
+                if(rssElement.rssImage != null){ newInnerHTML += `<a href="${rssElement.rssLink}"><img src="${rssElement.rssImage}"></a><br>`; } // adds image, if available
+                if(rssElement.rssDescription != null){ newInnerHTML += `${rssElement.rssDescription}`; } // adds feed description, if availabe
+                newInnerHTML += `</div>`;
             }
-            if(step < 3){
-                li.innerHTML += `
-                <div class="feed-time">${rssElement.rssDate.getHours()>9?rssElement.rssDate.getHours():"0"+rssElement.rssDate.getHours()}:${rssElement.rssDate.getMinutes()>9?rssElement.rssDate.getMinutes():"0"+rssElement.rssDate.getMinutes()} Uhr</div>
-                `;
-            }
-            else{
-                li.innerHTML += `
-                <div class="feed-time">${rssElement.rssDate.getDate()>9?rssElement.rssDate.getDate():"0"+rssElement.rssDate.getDate()}.${rssElement.rssDate.getMonth()>8?rssElement.rssDate.getMonth()+1:"0"+(rssElement.rssDate.getMonth()+1)}, ${rssElement.rssDate.getHours()>9?rssElement.rssDate.getHours():"0"+rssElement.rssDate.getHours()}:${rssElement.rssDate.getMinutes()>9?rssElement.rssDate.getMinutes():"0"+rssElement.rssDate.getMinutes()} Uhr</div>
-                `;
-            }
+            newInnerHTML += `<div class="feed-time">${rssElement.rssDate.getHours()>9?rssElement.rssDate.getHours():"0"+rssElement.rssDate.getHours()}:${rssElement.rssDate.getMinutes()>9?rssElement.rssDate.getMinutes():"0"+rssElement.rssDate.getMinutes()} Uhr, ${daynames[rssElement.rssDate.getDay()]}. ${rssElement.rssDate.getDate()>9?rssElement.rssDate.getDate():"0"+rssElement.rssDate.getDate()}.${rssElement.rssDate.getMonth()>8?rssElement.rssDate.getMonth()+1:"0"+(rssElement.rssDate.getMonth()+1)}</div>`;
+
+            // create a list element
+            let li = document.createElement('li');
+            li.classList.add(`feed-news-entry`)
+            // add HTML content to list item
+            li.innerHTML = newInnerHTML;
             // append HTML content to list 
             textarea.appendChild(li);
         }
@@ -235,3 +233,4 @@ class RssFeed {
 }
 
 let rssFeed = new RssFeed(textarea, addresses);
+setInterval(() => {rssFeed.upgradeRecursive();}, 40000);
