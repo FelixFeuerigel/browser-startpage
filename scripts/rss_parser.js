@@ -165,18 +165,18 @@ class RssFeed {
                     textarea.appendChild(h3);
                 }
             }
-            else if(rssElement.rssDate.getFullYear() != year){
+            else if(rssElement.rssDate.getFullYear() != t_now.getFullYear() && rssElement.rssDate.getMonth() != month){
                 year = rssElement.rssDate.getFullYear();
                 month = rssElement.rssDate.getMonth();
                 let h3 = document.createElement('li');
-                h3.classList.add(`feed-time-entry`)
-                h3.innerHTML = `${monthNames[11]} ${year}`;
+                h3.classList.add(`feed-time-entry`);
+                h3.innerHTML = `${monthNames[month]} ${year}`;
                 textarea.appendChild(h3);
             }
             else if(rssElement.rssDate.getMonth() != month){
                 month = rssElement.rssDate.getMonth();
                 let h3 = document.createElement('li');
-                h3.classList.add(`feed-time-entry`)
+                h3.classList.add(`feed-time-entry`);
                 h3.innerHTML = `${monthNames[month]}`;
                 textarea.appendChild(h3);
             }
