@@ -96,6 +96,11 @@ html, body, .flex-container{
     background-color: var(--highlight-color);
 }
 
+.link-tile:active{
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.4) inset;
+    background-color: var(--highlight-color);
+}
+
 /* feed container */
 .feed{
     min-height: 80vh;

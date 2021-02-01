@@ -1,6 +1,5 @@
 const addresses = [
     "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", // ThrillSeeker
-    "https://www.youtube.com/feeds/videos.xml?channel_id=UCeeFfhMcJa1kjtfZAGskOCA", // TechLinked
     "https://twitchrss.appspot.com/vod/thrilluwu",
     "http://sempervideo.de/feed/",
 ];
