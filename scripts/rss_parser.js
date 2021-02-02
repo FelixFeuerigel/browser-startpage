@@ -4,7 +4,7 @@ const addresses = [
     "http://sempervideo.de/feed/",
 ];
 const monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
-const daynames = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+const daynames = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 
 const textarea = document.querySelector('#feed-textarea');
 
