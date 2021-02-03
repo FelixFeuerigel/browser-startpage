@@ -42,7 +42,7 @@ class RssAddress{
     rssData;
     rssElements = new Array();
 
-    constructor(pAdress = new String(), pFeed = new RssFeed(), pTimeout = 40000){ // --- timeout duration --- // 
+    constructor(pAdress = new String(), pFeed = new RssFeed(), pTimeout = 40000){
         this.address = pAdress;
         this.feed = pFeed;
         this.baseTimeout = pTimeout;
