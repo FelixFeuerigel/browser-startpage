@@ -1,4 +1,5 @@
 const addresses = [
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCBdIstCmMf6W1IcL7hgyL9Q", // Selphius
     "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", // ThrillSeeker
     "https://twitchrss.appspot.com/vod/thrilluwu",
     "http://sempervideo.de/feed/",
@@ -33,13 +34,19 @@ class RssElement{
 
 class RssAddress{
     address = new String();
+    feed;
+    baseTimeout = new Number();
+    timeout = new Number();
     status = new String();
     iconURL = new String();
     rssData;
     rssElements = new Array();
 
-    constructor(pAdress = new String()){
+    constructor(pAdress = new String(), pFeed = new RssFeed(), pTimeout = 40000){ // --- timeout duration --- // 
         this.address = pAdress;
+        this.feed = pFeed;
+        this.baseTimeout = pTimeout;
+        this.timeout = pTimeout;
         this.status = "no data";
         this.iconURL = "http://" + new URL(this.address).host + "/favicon.ico";
     }
@@ -55,6 +62,8 @@ class RssAddress{
         this.status = "data loaded";
         console.log(`Loaded feed from: ${this.address}`);
 
+        this.timeout = this.baseTimeout;
+        setTimeout(()=>{this.upgrade();}, this.timeout);
         return newElements;
     }
     onAddressLoadFailed(val){ // gets executed if the loading fails
@@ -62,12 +71,24 @@ class RssAddress{
         console.log(`Failed to get feed from: ${this.address}`);
         console.log(val);
 
+        if(this.timeout < this.baseTimeout * 10){
+            this.timeout = Math.ceil(this.timeout * 1.3);
+        }
+        setTimeout(()=>{this.upgrade();}, this.timeout);
         return [];
     }
-    async update() { // loads the RssFeed and updates this Object
+    async upgrade() { // loads the address and prints it to feed
         this.status = "loading data";
-        let feed = feednami.load(this.address).then( (val)=>{this.onRssAddressLoaded(val);}, (val)=>{this.onAddressLoadFailed(val);} );
-
+        let feed = feednami.load(this.address).then(
+            (val)=>{
+                this.onRssAddressLoaded(val);
+                this.feed.upgrade();
+            },
+            (val)=>{
+                this.onAddressLoadFailed(val);
+                this.feed.upgrade();
+            }
+        );
         return feed;
     }
 }
@@ -82,7 +103,7 @@ class RssFeed {
     constructor(pTextarea = new Element(), pAddresses = new Array()){
         this.textContainer = pTextarea
         for(let address of pAddresses){
-            this.rssAddresses.push(new RssAddress(address))
+            this.rssAddresses.push(new RssAddress(address, this))
         }
         this.upgradeRecursive();
     }
@@ -184,7 +205,7 @@ class RssFeed {
             let newInnerHTML = String();
             newInnerHTML = `
             <div class="feed-meta-title-container">
-                <img src="${rssElement.iconURL}">
+                <img src="${rssElement.iconURL}" alt="">
                 <a class="feed-meta-title" href="${rssElement.metaLink}">${rssElement.metaTitle}</a>
             </div>
             <a class="feed-entry-title" href="${rssElement.rssLink}">${rssElement.rssTitle}</a>
@@ -219,17 +240,19 @@ class RssFeed {
         this.print();
         return ret;
     }
-    upgradeRecursive(){ // updates the rssAddresses as well as this.content and then prints
-        console.log("Reloading addresses:");
+    upgradeRecursive(){ // updates the rssAddresses plus this.content and then prints
+        console.log("Loading addresses:");
         for(let address of this.rssAddresses){
-            address.update().then( (val)=>{this.upgrade();} ); // for every updatet adress.content
+            address.upgrade() // tells the addresses to update and call RssFeed.upgrade
         }
         return;
     }
-    setTimer(timer = new Number()){ // changes the time between upgrades
-        return setInterval(this.upgradeRecursive, timer);
+    setTimeout(pTimeout = new Number()){ // changes the time between upgrades
+        for(let iAddress of this.rssAddresses){
+            iAddress.baseTimeout = pTimeout;
+        }
+        return;
     }
 }
 
 let rssFeed = new RssFeed(textarea, addresses);
-setInterval(() => {rssFeed.upgradeRecursive();}, 40000);
