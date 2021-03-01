@@ -1,5 +1,4 @@
 const addresses = [
-    "https://www.youtube.com/feeds/videos.xml?channel_id=UCBdIstCmMf6W1IcL7hgyL9Q", // Selphius
     "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", // ThrillSeeker
     "https://twitchrss.appspot.com/vod/thrilluwu",
     "http://sempervideo.de/feed/",
@@ -63,7 +62,9 @@ class RssAddress{
         console.log(`Loaded feed from: ${this.address}`);
 
         this.timeout = this.baseTimeout;
-        setTimeout(()=>{this.upgrade();}, this.timeout);
+        if(this.baseTimeout >= 0){
+            setTimeout(()=>{this.upgrade();}, this.timeout);
+        }
         return newElements;
     }
     onAddressLoadFailed(val){ // gets executed if the loading fails
@@ -74,7 +75,9 @@ class RssAddress{
         if(this.timeout < this.baseTimeout * 10){
             this.timeout = Math.ceil(this.timeout * 1.3);
         }
-        setTimeout(()=>{this.upgrade();}, this.timeout);
+        if(this.baseTimeout >= 0){
+            setTimeout(()=>{this.upgrade();}, this.timeout);
+        }
         return [];
     }
     async upgrade() { // loads the address and prints it to feed
@@ -247,7 +250,7 @@ class RssFeed {
         }
         return;
     }
-    setTimeout(pTimeout = new Number()){ // changes the time between upgrades
+    setTimeout(pTimeout = new Number()){ // changes the time between upgrades, values lower than 0 stop the updating
         for(let iAddress of this.rssAddresses){
             iAddress.baseTimeout = pTimeout;
         }

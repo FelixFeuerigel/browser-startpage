@@ -1,9 +1,9 @@
 :root{
     --border-radius: 5px;
-    --item-color: rgba(152, 94, 214, 0.8);
+    --item-color: rgb(42, 87, 163);
     --text-color: white;
-    --highlight-color: rgb(219, 50, 134);
-    --background-color: rgba(101, 64, 157, 0.8);
+    --highlight-color: rgb(219, 0, 110);
+    --background-color: rgba(53, 6, 116, 0.8);
 }
 
 body{
@@ -187,6 +187,7 @@ html, body, .flex-container{
 .feed-time, .feed-entry-description, .feed-entry-title, .feed-meta-title{
     display: block;
     padding: 5px;
+    overflow-x: hidden;
 }
 
 .feed-entry-description img{
@@ -211,7 +212,7 @@ html, body, .flex-container{
     text-align: right;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 999px) {
     .flex-container {
         flex-direction: column;
     }
