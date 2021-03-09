@@ -137,7 +137,7 @@ html, body, .flex-container{
     margin: 0px;
 }
 
-.feed li, .feed h3{ /* all list items */
+.feed li, .feed-title{ /* all list items */
     display: block;
     border-radius: var(--border-radius);
     margin: 10px;
@@ -148,7 +148,7 @@ html, body, .flex-container{
     background-color: var(--item-color);
 }
 
-.feed h3, .feed-time-entry{ /* informarion items */
+.feed-title, .feed-time-entry{ /* informarion items */
     font-size: 19px;
     font-weight: bold;
     background-color: var(--highlight-color);
@@ -156,7 +156,7 @@ html, body, .flex-container{
     padding: 7px;
 }
 
-.feed h3{
+.feed-title{
     margin-top: 10px;
 }
 

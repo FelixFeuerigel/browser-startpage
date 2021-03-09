@@ -1,10 +1,7 @@
 const addresses = [
     "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", // ThrillSeeker
-    "https://twitchrss.appspot.com/vod/thrilluwu",
-    "http://sempervideo.de/feed/",
+    "https://twitchrss.appspot.com/vod/thrilluwu"
 ];
-const monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
-const daynames = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 
 const textarea = document.querySelector('#feed-textarea');
 
@@ -101,7 +98,7 @@ class RssFeed {
     rssAddresses = new Array(); // Array of RSS feed addresses
     content = new Array();      // combined content of addresses
     monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
-    daynames = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+    dayNames = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 
     constructor(pTextarea = new Element(), pAddresses = new Array()){
         this.textContainer = pTextarea
@@ -193,14 +190,14 @@ class RssFeed {
                 month = rssElement.rssDate.getMonth();
                 let h3 = document.createElement('li');
                 h3.classList.add(`feed-time-entry`);
-                h3.innerHTML = `${monthNames[month]} ${year}`;
+                h3.innerHTML = `${this.monthNames[month]} ${year}`;
                 textarea.appendChild(h3);
             }
             else if(rssElement.rssDate.getMonth() != month){
                 month = rssElement.rssDate.getMonth();
                 let h3 = document.createElement('li');
                 h3.classList.add(`feed-time-entry`);
-                h3.innerHTML = `${monthNames[month]}`;
+                h3.innerHTML = `${this.monthNames[month]}`;
                 textarea.appendChild(h3);
             }
             
@@ -219,7 +216,7 @@ class RssFeed {
                 if(rssElement.rssDescription != null){ newInnerHTML += `${rssElement.rssDescription}`; } // adds feed description, if availabe
                 newInnerHTML += `</div>`;
             }
-            newInnerHTML += `<div class="feed-time">${rssElement.rssDate.getHours()>9?rssElement.rssDate.getHours():"0"+rssElement.rssDate.getHours()}:${rssElement.rssDate.getMinutes()>9?rssElement.rssDate.getMinutes():"0"+rssElement.rssDate.getMinutes()} Uhr, ${daynames[rssElement.rssDate.getDay()]}. ${rssElement.rssDate.getDate()>9?rssElement.rssDate.getDate():"0"+rssElement.rssDate.getDate()}.${rssElement.rssDate.getMonth()>8?rssElement.rssDate.getMonth()+1:"0"+(rssElement.rssDate.getMonth()+1)}</div>`;
+            newInnerHTML += `<div class="feed-time">${rssElement.rssDate.getHours()>9?rssElement.rssDate.getHours():"0"+rssElement.rssDate.getHours()}:${rssElement.rssDate.getMinutes()>9?rssElement.rssDate.getMinutes():"0"+rssElement.rssDate.getMinutes()} Uhr, ${this.dayNames[rssElement.rssDate.getDay()]}. ${rssElement.rssDate.getDate()>9?rssElement.rssDate.getDate():"0"+rssElement.rssDate.getDate()}.${rssElement.rssDate.getMonth()>8?rssElement.rssDate.getMonth()+1:"0"+(rssElement.rssDate.getMonth()+1)}</div>`;
 
             // create a list element
             let li = document.createElement('li');
@@ -234,6 +231,7 @@ class RssFeed {
     
         let h3Title = document.createElement(`h3`); // create RSS title
         h3Title.innerHTML = `RSS-Feed`;
+        h3Title.classList.add(`feed-title`)
         this.textContainer.appendChild(h3Title); // print RSS title to textContainer
 
         this.textContainer.appendChild(textarea); // print feed element list to textContainer 
@@ -258,4 +256,5 @@ class RssFeed {
     }
 }
 
-let rssFeed = new RssFeed(textarea, addresses);
+let rssFeed
+window.onload = () => { rssFeed = new RssFeed(textarea, addresses); };
