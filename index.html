@@ -37,20 +37,18 @@
                     <a class="link-tile" href="https://moodle2.gsoe.de/">Moodle</a>
                     <a class="link-tile" href="https://nextcloud.oehringen-gs.logoip.de/">Nextcloud</a>
                     <a class="link-tile" href="https://webuntis.com/">WebUntis</a>
-                    <a class="link-tile" href="https://app.schul.cloud/">schul.cloud</a>
                 </section>
                 <section class="link-container">
-                    <a class="link-tile" href="https://github.com/">GitHub</a>
-                    <a class="link-tile" href="http://192.168.178.80/admin">Pi-Hole</a>
-                    <a class="link-tile" href="http://192.168.178.80:1880/ui/">Smart-Home</a>
+                    <a class="link-tile" href="http://homeassistant:8123/">HomeAssistant</a>
+                    <a class="link-tile" href="http://192.168.178.80:8080/">Heimdall</a>
                     <a class="link-tile" href="http://192.168.178.1/">FRITZ!Box</a>
                 </section>
                 <section class="link-container">
-                    <a class="link-tile" onclick="getURL(`http://192.168.178.80:1880/hue`, [[`lampe`, `Felixs Zimmer`], [`scene`, `Aus`]])">Aus</a>
-                    <a class="link-tile" onclick="getURL(`http://192.168.178.80:1880/hue`, [[`lampe`, `Felixs Zimmer`], [`scene`, `Hell`]])">Hell</a>
-                    <a class="link-tile" onclick="getURL(`http://192.168.178.80:1880/hue`, [[`lampe`, `Felixs Zimmer`], [`scene`, `Computer`]])">Computer</a>
-                    <a class="link-tile" onclick="getURL(`http://192.168.178.80:1880/hue`, [[`lampe`, `Felixs Zimmer`], [`scene`, `Entspannen`]])">Entspannen</a>
-                    <a class="link-tile" onclick="getURL(`http://192.168.178.80:1880/hue`, [[`lampe`, `Felixs Zimmer`], [`scene`, `Nachtlicht`]])">Nachtlich</a>
+                    <a class="link-tile" onclick="getURL(`http://homeassistant:1880/endpoint/hue`, [[`lampe`, `Felixs Zimmer`], [`scene`, `Aus`]])">Aus</a>
+                    <a class="link-tile" onclick="getURL(`http://homeassistant:1880/endpoint/hue`, [[`lampe`, `Felixs Zimmer`], [`scene`, `Hell`]])">Hell</a>
+                    <a class="link-tile" onclick="getURL(`http://homeassistant:1880/endpoint/hue`, [[`lampe`, `Felixs Zimmer`], [`scene`, `Computer`]])">Computer</a>
+                    <a class="link-tile" onclick="getURL(`http://homeassistant:1880/endpoint/hue`, [[`lampe`, `Felixs Zimmer`], [`scene`, `Entspannen`]])">Entspannen</a>
+                    <a class="link-tile" onclick="getURL(`http://homeassistant:1880/endpoint/hue`, [[`lampe`, `Felixs Zimmer`], [`scene`, `Nachtlicht`]])">Nachtlich</a>
                 </section>
             </div>        
         </div>

@@ -1,13 +1,3 @@
-const addresses = [
-    "https://myanimelist.net/rss.php?type=rwe&u=DasIchigo",
-    "https://myanimelist.net/rss.php?type=rwe&u=Ishoy33",
-    "https://old.reddit.com/message/inbox/.rss?feed=51ba0264dd1e3be53206e38ed50504b91a7370fb&user=felix_feuerigel",
-    "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", // ThrillSeeker
-    "https://twitchrss.appspot.com/vod/thrilluwu"
-];
-
-const textarea = document.querySelector('#feed-textarea');
-
 class RssElement{
     iconURL = new String();
     rssDate = new Date();
@@ -258,6 +248,3 @@ class RssFeed {
         return;
     }
 }
-
-let rssFeed
-window.onload = () => { rssFeed = new RssFeed(textarea, addresses); };

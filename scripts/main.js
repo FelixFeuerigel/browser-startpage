@@ -1,3 +1,14 @@
+const addresses = [
+    "https://myanimelist.net/rss.php?type=rwe&u=evening_188",
+    "https://myanimelist.net/rss.php?type=rwe&u=DasIchigo",
+    "https://myanimelist.net/rss.php?type=rwe&u=Ishoy33",
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", // ThrillSeeker
+    "https://twitchrss.appspot.com/vod/thrilluwu"
+];
+
+const textarea = document.querySelector('#feed-textarea');
+
+
 function UpdateClock(){
     var d = new Date();
     var nhour = d.getHours()
@@ -14,9 +25,6 @@ function UpdateClock(){
     document.getElementById('clock').innerHTML = clocktext;
 }
 
-UpdateClock();
-setInterval(UpdateClock,1000);
-
 function getURL(url = "", header = []){
     let xml = new XMLHttpRequest();
     xml.open("GET", url);
@@ -26,3 +34,9 @@ function getURL(url = "", header = []){
     xml.send();
     return xml;
 }
+
+UpdateClock();
+setInterval(UpdateClock,1000);
+
+let rssFeed;
+window.onload = () => { if(feednami){rssFeed = new RssFeed(textarea, addresses);} };
