@@ -1,7 +1,7 @@
 const addresses = [
-    "https://myanimelist.net/rss.php?type=rwe&u=evening_188",
-    "https://myanimelist.net/rss.php?type=rwe&u=DasIchigo",
-    "https://myanimelist.net/rss.php?type=rwe&u=Ishoy33",
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCBJycsmduvYEL83R_U4JriQ",
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCXuqSBlHAE6Xw-yeJA0Tunw",
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A",
     "https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA", // ThrillSeeker
     "https://twitchrss.appspot.com/vod/thrilluwu"
 ];
